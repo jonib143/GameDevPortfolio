@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for standard icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        steam: {
+                            bg: '#1b2838',        // Main body background
+                            nav: '#171a21',       // Header nav
+                            panel: '#101822',     // Darker panels
+                            panelHover: '#1f2f42',
+                            text: '#c6d4df',      // Primary readable text
+                            title: '#ffffff',     // Bright titles
+                            blue: '#66c0f4',      // Accent links/tags
+                            blueDark: '#417a9b',
+                            tagBg: '#2a475e',     // Tag background
+                            btnGreenTop: '#79b929', // Play button gradient top
+                            btnGreenBot: '#5e8f1c', // Play button gradient bottom
+                            highlightBg: 'rgba(38, 54, 69, 0.6)'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'steam-banner': 'linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #1b2838;
+            color: #c6d4df;
+            overflow-y: scroll;
+        }
+
+        /* Steam style scrollbar */
+        ::-webkit-scrollbar {
+            width: 14px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #171a21;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #455a64;
+            border-radius: 2px;
+            border: 3px solid #171a21;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #546e7a;
+        }
+
+        .steam-shadow {
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Utility for maintaining aspect ratio on main media */
+        .aspect-w-16 { position: relative; padding-bottom: 56.25%; }
+        .aspect-w-16 > * { position: absolute; height: 100%; width: 100%; top: 0; right: 0; bottom: 0; left: 0; }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen font-sans">
+
+    <!-- Navigation -->
+    <nav class="bg-steam-nav text-steam-text sticky top-0 z-50 steam-shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo / Name -->
+                <div class="flex items-center gap-4">
+                    <i class="fa-solid fa-gamepad text-steam-title text-2xl"></i>
+                    <span class="text-steam-title font-bold text-xl uppercase tracking-wider">DevName Portfolio</span>
+                </div>
+                
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <button onclick="navigate('home')" id="nav-home" class="nav-link text-steam-title hover:text-steam-blue px-3 py-2 rounded-md text-sm font-semibold uppercase tracking-wide transition-colors">Showcase</button>
+                        <button onclick="navigate('about')" id="nav-about" class="nav-link text-steam-text hover:text-steam-title px-3 py-2 rounded-md text-sm font-medium uppercase tracking-wide transition-colors">About Me</button>
+                        <button onclick="navigate('contact')" id="nav-contact" class="nav-link text-steam-text hover:text-steam-title px-3 py-2 rounded-md text-sm font-medium uppercase tracking-wide transition-colors">Contact</button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="text-steam-text hover:text-steam-title focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-steam-panel border-t border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <button onclick="navigate('home'); toggleMobileMenu()" class="block w-full text-left text-steam-title hover:bg-steam-panelHover px-3 py-2 rounded-md text-base font-medium">Showcase</button>
+                <button onclick="navigate('about'); toggleMobileMenu()" class="block w-full text-left text-steam-text hover:bg-steam-panelHover px-3 py-2 rounded-md text-base font-medium">About Me</button>
+                <button onclick="navigate('contact'); toggleMobileMenu()" class="block w-full text-left text-steam-text hover:bg-steam-panelHover px-3 py-2 rounded-md text-base font-medium">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow w-full">
+        
+        <!-- VIEW: HOME (SHOWCASE) -->
+        <div id="view-home" class="w-full pb-12 fade-in">
+            
+            <!-- STEAM STYLE CAROUSEL SECTION -->
+            <div class="max-w-[1200px] mx-auto px-0 sm:px-4 mt-6">
+                <h2 class="text-steam-title text-xl mb-2 ml-4 md:ml-12 font-bold tracking-wide shadow-black drop-shadow-md">Featured Projects</h2>
+                
+                <div class="relative w-full flex items-stretch justify-center h-[auto] md:h-[353px]">
+                    
+                    <!-- Left Arrow Area (Prev Project Preview) -->
+                    <div class="hidden md:block w-[10%] relative cursor-pointer group overflow-hidden bg-[#0a0f16]" onclick="prevProject()">
+                        <img id="feat-prev-img" src="" class="absolute inset-y-0 right-0 w-[400px] max-w-none h-full object-cover opacity-40 blur-[1px] transition-opacity duration-300 group-hover:opacity-60">
+                        <div class="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-colors"></div>
+                        <div class="absolute inset-0 bg-gradient-to-l from-black/80 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <!-- Steam style arrow -->
+                            <i class="fa-solid fa-angle-left text-6xl text-white opacity-60 group-hover:opacity-100 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-x-1 scale-y-125 drop-shadow-[0_0_10px_rgba(0,0,0,1)]"></i>
+                        </div>
+                    </div>
+
+                    <!-- Main Featured Project -->
+                    <div class="w-full md:w-[80%] bg-steam-nav flex flex-col md:flex-row shadow-[0_0_15px_rgba(0,0,0,0.8)] z-10 cursor-pointer group" onclick="document.getElementById('details-section').scrollIntoView({behavior: 'smooth'})">
+                        
+                        <!-- Left Main Image -->
+                        <div class="md:w-[62%] relative h-64 md:h-full overflow-hidden bg-black">
+                            <img id="feat-main-img" src="" alt="Featured Game" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent md:hidden pointer-events-none"></div>
+                            
+                            <!-- Title overlay for mobile -->
+                            <h3 id="feat-title-mobile" class="md:hidden absolute bottom-4 left-10 right-10 text-xl font-bold text-white shadow-sm text-center z-10">Project Title</h3>
+                            
+                            <!-- Mobile Navigation Arrows (Overlay) -->
+                            <button onclick="event.stopPropagation(); prevProject()" class="md:hidden absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-black/60 to-transparent flex items-center justify-start pl-2 text-white z-20"><i class="fa-solid fa-angle-left text-4xl drop-shadow-md"></i></button>
+                            <button onclick="event.stopPropagation(); nextProject()" class="md:hidden absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-black/60 to-transparent flex items-center justify-end pr-2 text-white z-20"><i class="fa-solid fa-angle-right text-4xl drop-shadow-md"></i></button>
+                        </div>
+                        
+                        <!-- Right Info Area -->
+                        <div class="md:w-[38%] p-4 flex flex-col justify-between relative bg-steam-nav overflow-hidden">
+                            <!-- Slight background texture/gradient mimicking Steam -->
+                            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-steam-blue to-transparent pointer-events-none"></div>
+                            
+                            <div class="relative z-10">
+                                <h3 id="feat-title" class="hidden md:block text-2xl font-bold text-steam-title mb-2 drop-shadow-md">Project Title</h3>
+                                <p id="feat-short-desc" class="text-sm text-steam-text mb-4 line-clamp-3 leading-snug">
+                                    Short description goes here. It provides a quick hook about what the game is.
+                                </p>
+                                
+                                <!-- 2x2 Thumbnail Grid -->
+                                <div class="grid grid-cols-2 gap-1.5 mb-4 hidden sm:grid">
+                                    <div class="bg-steam-panel aspect-video relative overflow-hidden rounded-sm"><img id="feat-thumb-1" src="" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity"></div>
+                                    <div class="bg-steam-panel aspect-video relative overflow-hidden rounded-sm"><img id="feat-thumb-2" src="" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity"></div>
+                                    <div class="bg-steam-panel aspect-video relative overflow-hidden rounded-sm"><img id="feat-thumb-3" src="" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity"></div>
+                                    <div class="bg-steam-panel aspect-video relative overflow-hidden rounded-sm"><img id="feat-thumb-4" src="" class="w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="relative z-10">
+                                <div class="text-xs text-steam-text mb-1">Tags:</div>
+                                <div id="feat-tags" class="flex flex-wrap gap-1 mb-3">
+                                    <!-- Tags injected by JS -->
+                                </div>
+                                <div class="flex justify-between items-center text-sm">
+                                    <span id="feat-role" class="text-steam-text">Role: Programmer</span>
+                                    <span class="text-steam-title bg-steam-panel px-3 py-1 rounded-sm border border-transparent group-hover:border-steam-blueDark transition-colors">View Details</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Arrow Area (Next Project Preview) -->
+                    <div class="hidden md:block w-[10%] relative cursor-pointer group overflow-hidden bg-[#0a0f16]" onclick="nextProject()">
+                        <img id="feat-next-img" src="" class="absolute inset-y-0 left-0 w-[400px] max-w-none h-full object-cover opacity-40 blur-[1px] transition-opacity duration-300 group-hover:opacity-60">
+                        <div class="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-colors"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <!-- Steam style arrow -->
+                            <i class="fa-solid fa-angle-right text-6xl text-white opacity-60 group-hover:opacity-100 transition-transform duration-300 group-hover:scale-110 group-hover:translate-x-1 scale-y-125 drop-shadow-[0_0_10px_rgba(0,0,0,1)]"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Dots Indicator -->
+                <div id="carousel-dots" class="flex justify-center items-center gap-1.5 mt-4 mb-8">
+                    <!-- Dots injected by JS -->
+                </div>
+            </div>
+
+            <div class="max-w-5xl mx-auto px-4 mt-2 flex flex-col gap-10">
+                
+                <!-- SECTION 2: Detailed Game Hero (Matches Image 2 layout) -->
+                <section id="details-section" class="pt-4 scroll-mt-20">
+                    <h1 id="detail-title" class="text-3xl font-bold text-steam-title mb-4 font-serif tracking-wide">Project Title</h1>
+                    
+                    <div class="flex flex-col lg:flex-row gap-6 bg-steam-panel/30 p-4 rounded bg-gradient-to-br from-steam-nav to-transparent steam-shadow">
+                        
+                        <!-- Left Media Column -->
+                        <div class="lg:w-[65%] flex flex-col gap-2">
+                            <!-- Main Active Media -->
+                            <div class="aspect-w-16 bg-black rounded border border-gray-800 shadow-inner">
+                                <img id="detail-active-img" src="" alt="Active Gameplay" class="w-full h-full object-cover absolute top-0 left-0">
+                                <!-- Optional Play Icon Overlay for videos -->
+                                <div id="detail-video-overlay" class="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 hover:opacity-100 transition-opacity cursor-pointer">
+                                    <i class="fa-regular fa-circle-play text-6xl text-white/80"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Gallery Thumbnail Strip -->
+                            <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-thin relative mt-1" id="detail-gallery-strip">
+                                <!-- Thumbnails injected by JS -->
+                            </div>
+                            <!-- Custom slider scrollbar visualization -->
+                            <div class="w-full h-1 bg-steam-panel rounded-full overflow-hidden mt-1">
+                                <div class="w-1/4 h-full bg-steam-blueDark rounded-full"></div>
+                            </div>
+                        </div>
+
+                        <!-- Right Info Column -->
+                        <div class="lg:w-[35%] flex flex-col gap-4 text-sm">
+                            
+                            <p id="detail-desc" class="text-steam-text leading-relaxed">
+                                Detailed description goes here. Expanding on the premise of the game and what makes it special.
+                            </p>
+                            
+                            <!-- Meta Data Table -->
+                            <div class="flex flex-col gap-1 mt-2 text-xs">
+                                <div class="grid grid-cols-[100px_1fr] border-b border-steam-panel pb-1">
+                                    <span class="text-[#556772] uppercase font-semibold">My Role:</span>
+                                    <span id="detail-meta-role" class="text-steam-blue">Lead Developer</span>
+                                </div>
+                                <div class="grid grid-cols-[100px_1fr] border-b border-steam-panel pb-1 pt-1">
+                                    <span class="text-[#556772] uppercase font-semibold">Engine:</span>
+                                    <span id="detail-meta-engine" class="text-steam-blue">Unity 3D</span>
+                                </div>
+                                <div class="grid grid-cols-[100px_1fr] border-b border-steam-panel pb-1 pt-1">
+                                    <span class="text-[#556772] uppercase font-semibold">Timeline:</span>
+                                    <span id="detail-meta-date" class="text-steam-text">Jan 2023 - May 2023</span>
+                                </div>
+                                 <div class="grid grid-cols-[100px_1fr] pt-1">
+                                    <span class="text-[#556772] uppercase font-semibold">Team Size:</span>
+                                    <span id="detail-meta-team" class="text-steam-text">4 Members</span>
+                                </div>
+                            </div>
+
+                            <!-- Tags -->
+                            <div class="mt-2">
+                                <p class="text-[#556772] text-xs mb-1">Popular user-defined tags for this product:</p>
+                                <div id="detail-tags" class="flex flex-wrap gap-1">
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="mt-auto pt-4 flex flex-col gap-2">
+                                <a id="btn-play" href="#" target="_blank" class="block w-full py-3 rounded text-center text-white font-semibold tracking-wide shadow-md hover:brightness-110 transition-all" style="background: linear-gradient(to right, #79b929, #5e8f1c);">
+                                    <i class="fa-solid fa-play mr-2"></i> Play / Download Game
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 3: Deep Dive (Matches Image 3 layout) -->
+                <section class="mt-8">
+                    <h2 class="text-white border-b border-gray-700 pb-2 mb-4 font-bold uppercase tracking-wider text-sm flex items-center gap-2">
+                        <span class="bg-steam-blue w-1 h-4 block"></span> About This Project
+                    </h2>
+                    
+                    <!-- Content Area -->
+                    <div class="bg-steam-highlightBg p-6 rounded-md shadow-inner text-base text-steam-text leading-relaxed">
+                        
+                        <div id="long-desc-content" class="space-y-6">
+                            <!-- Injected by JS: Paragraphs and Inline Images -->
+                        </div>
+
+                        <!-- Technical Challenges Section -->
+                        <div class="mt-10 border-t border-gray-700 pt-6">
+                            <h3 class="text-steam-blue font-bold text-lg mb-3">My Role & Key Challenges</h3>
+                            <div class="bg-steam-panel p-4 rounded border-l-4 border-steam-blue">
+                                <p id="long-desc-challenges" class="italic text-gray-400 text-sm md:text-base">
+                                    Description of specific programming/design challenges overcome during development.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- VIEW: ABOUT ME -->
+        <div id="view-about" class="hidden w-full max-w-4xl mx-auto px-4 py-12 fade-in">
+            <h1 class="text-3xl font-bold text-steam-title mb-6 font-serif">About the Developer</h1>
+            <div class="bg-steam-nav p-8 rounded shadow-lg flex flex-col md:flex-row gap-8 items-start">
+                <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-steam-panel flex-shrink-0 mx-auto md:mx-0 shadow-black shadow-lg">
+                    <img src="https://placehold.co/400x400/2a475e/c6d4df?text=Profile+Pic" alt="Profile" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-grow space-y-4 text-steam-text leading-relaxed">
+                    <h2 class="text-xl text-steam-blue font-semibold">Hello, I'm [Your Name]</h2>
+                    <p>I am a passionate student game developer specializing in [Your Specialization, e.g., Gameplay Programming / Level Design]. I love creating immersive experiences and solving complex technical problems.</p>
+                    <p>Currently studying [Your Degree] at [Your University]. I am actively seeking internship and junior roles in the games industry.</p>
+                    
+                    <h3 class="text-steam-title font-bold mt-6 mb-2 border-b border-gray-700 pb-1">Technical Skills</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-steam-panel px-3 py-1 rounded text-sm">C#</span>
+                        <span class="bg-steam-panel px-3 py-1 rounded text-sm">C++</span>
+                        <span class="bg-steam-panel px-3 py-1 rounded text-sm">Unity</span>
+                        <span class="bg-steam-panel px-3 py-1 rounded text-sm">Unreal Engine</span>
+                        <span class="bg-steam-panel px-3 py-1 rounded text-sm">Git / Perforce</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW: CONTACT -->
+        <div id="view-contact" class="hidden w-full max-w-2xl mx-auto px-4 py-12 fade-in">
+            <h1 class="text-3xl font-bold text-steam-title mb-6 font-serif text-center">Get In Touch</h1>
+            <div class="bg-steam-nav p-8 rounded shadow-lg">
+                <p class="text-center text-steam-text mb-8">I'm currently looking for new opportunities. Feel free to reach out!</p>
+                
+                <div class="space-y-4 max-w-md mx-auto">
+                    <a href="mailto:your.email@example.com" class="flex items-center justify-center gap-4 w-full py-4 bg-steam-panel hover:bg-steam-panelHover rounded text-steam-title transition-colors text-lg border border-gray-800">
+                        <i class="fa-solid fa-envelope text-steam-blue text-2xl"></i> Email Me
+                    </a>
+                    <a href="#" target="_blank" class="flex items-center justify-center gap-4 w-full py-4 bg-steam-panel hover:bg-steam-panelHover rounded text-steam-title transition-colors text-lg border border-gray-800">
+                        <i class="fa-brands fa-linkedin text-[#0077b5] text-2xl"></i> LinkedIn
+                    </a>
+                    <a href="#" target="_blank" class="flex items-center justify-center gap-4 w-full py-4 bg-steam-panel hover:bg-steam-panelHover rounded text-steam-title transition-colors text-lg border border-gray-800">
+                        <i class="fa-brands fa-github text-white text-2xl"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0a0f16] mt-auto py-8 border-t border-black">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-xs text-[#556772]">© 2024 Your Name. All rights reserved. Game developer portfolio inspired by digital storefronts.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- PORTFOLIO DATA ---
+        // Placeholder image generator function to maintain color scheme
+        const phImg = (w, h, text, color1='2a475e', color2='66c0f4') => `https://placehold.co/${w}x${h}/${color1}/${color2}?text=${encodeURIComponent(text)}`;
+
+        const projectsData = [
+            {
+                id: "oxygen-clone",
+                title: "Colony Survival Sim",
+                shortDesc: "A deep space-colony simulation game. Manage oxygen, warmth, and sustenance to keep your industrious crew alive inside an alien space rock.",
+                role: "Lead Gameplay Programmer",
+                engine: "Unity 2D",
+                date: "Dec 2023",
+                teamSize: "Solo Project",
+                tags: ["Colony Sim", "Base Building", "Survival", "Resource Management"],
+                featuredMainImg: phImg(800, 450, "Featured Hero Artwork", "112233", "ffffff"),
+                featuredThumbs: [
+                    phImg(300, 169, "Action 1", "224455"), phImg(300, 169, "Action 2", "335566"),
+                    phImg(300, 169, "Action 3", "446677"), phImg(300, 169, "Action 4", "557788")
+                ],
+                coverImg: phImg(460, 215, "Game Header Capsule", "0f161f", "66c0f4"),
+                galleryImgs: [
+                    phImg(800, 450, "Gameplay Video/Gif Placeholder", "1b2838", "a1f410"),
+                    phImg(800, 450, "Base Building Mechanics", "2a475e"),
+                    phImg(800, 450, "Resource UI Screen", "171a21"),
+                    phImg(800, 450, "Exploration View", "384e5d")
+                ],
+                longDescHTML: `
+                    <p class="mb-4">In this simulation, you'll find that scarcities of essential resources are constant threats. Guide colonists through the perils of subterranean living and watch as their population grows.</p>
+                    <p class="text-steam-blue font-semibold mb-2 mt-6">Build Extensive Bases:</p>
+                    <img src="${phImg(800, 250, 'Inline Environment Image', '112233')}" class="w-full rounded mb-4 border border-gray-700 shadow-md">
+                    <p class="mb-4">Everything is under your control, from excavation to plumbing and power systems. Resources begin depleting fast, so optimization is key.</p>
+                    <p class="text-steam-blue font-semibold mb-2 mt-6">Complex Systems Integration:</p>
+                    <img src="${phImg(800, 250, 'Systems Diagram/UI', '2a475e')}" class="w-full rounded mb-4 border border-gray-700 shadow-md">
+                    <p>Designed a modular component system to handle interacting physics, gas distribution, and heat transfer across thousands of tile entities efficiently.</p>
+                `,
+                challengesText: "The biggest challenge was creating a robust cellular automata system for gas and liquid physics that ran at 60fps. I utilized Unity's Job System and Burst Compiler to multithread the chunk updates, resulting in a 400% performance increase.",
+                playLink: "#",
+                repoLink: "#"
+            },
+            {
+                id: "neon-slasher",
+                title: "Neon Cyber Knight",
+                shortDesc: "A fast-paced, neon-drenched hack and slash platformer. Master fluid movement and precise combat to defeat robotic hordes in a cyberpunk metropolis.",
+                role: "Combat Designer & Programmer",
+                engine: "Unreal Engine 5",
+                date: "May 2024",
+                teamSize: "3 Members",
+                tags: ["Action", "Platformer", "Hack & Slash", "Cyberpunk"],
+                featuredMainImg: phImg(800, 450, "Neon Knight Hero Art", "4a0050", "00ffff"),
+                featuredThumbs: [
+                    phImg(300, 169, "Combat Move", "300040"), phImg(300, 169, "Boss Fight", "500060"),
+                    phImg(300, 169, "Platforming", "600070"), phImg(300, 169, "Skill Tree", "700080")
+                ],
+                coverImg: phImg(460, 215, "Neon Knight Header", "200030", "ff00ff"),
+                galleryImgs: [
+                    phImg(800, 450, "Combat Trailer Video", "4a0050", "ffffff"),
+                    phImg(800, 450, "Level 1 Showcase", "300040"),
+                    phImg(800, 450, "Enemy Variety", "500060")
+                ],
+                longDescHTML: `
+                    <p class="mb-4">Step into the cybernetic boots of a rogue enforcer. Use a variety of combo strings and dash mechanics to obliterate enemies.</p>
+                    <img src="${phImg(800, 250, 'Combat Action Shot', '4a0050')}" class="w-full rounded mb-4 border border-gray-700 shadow-md">
+                    <p>Focus was on 'game feel', utilizing hit stop, camera shake, and particle explosions to make every strike feel impactful.</p>
+                `,
+                challengesText: "Implementing a flexible combo system state machine in C++ that designers could easily tweak using Blueprints. I created a custom data-driven animation notify system to handle hitboxes accurately during complex attack animations.",
+                playLink: "#",
+                repoLink: "#"
+            },
+            {
+                id: "puzzle-echo",
+                title: "Echoes in the Dark",
+                shortDesc: "An atmospheric puzzle-adventure where you manipulate sound waves to navigate a pitch-black labyrinth and reveal hidden geometry.",
+                role: "Solo Developer",
+                engine: "Godot 4",
+                date: "Oct 2022",
+                teamSize: "Solo",
+                tags: ["Puzzle", "Atmospheric", "Audio-based", "Indie"],
+                featuredMainImg: phImg(800, 450, "Echoes Key Art", "050510", "aaaaaa"),
+                featuredThumbs: [
+                    phImg(300, 169, "Sonar Ping", "101020"), phImg(300, 169, "Revealed Path", "151525"),
+                    phImg(300, 169, "Puzzle Element", "202030"), phImg(300, 169, "Darkness", "0a0a1a")
+                ],
+                coverImg: phImg(460, 215, "Echoes Header", "050510", "ffffff"),
+                galleryImgs: [
+                    phImg(800, 450, "Echolocation Demo", "050510", "ffffff"),
+                    phImg(800, 450, "Puzzle Room", "101020")
+                ],
+                longDescHTML: `
+                    <p class="mb-4">Rely on your ears as much as your eyes. Emitting sound pulses paints the environment temporarily, revealing platforms and hazards.</p>
+                `,
+                challengesText: "Writing a custom shader in GLSL to visualize sound waves hitting geometry in real-time. The shader uses distance fields from audio sources to mask world textures, creating the 'echolocation' visual effect.",
+                playLink: "#",
+                repoLink: "#"
+            }
+        ];
+
+        let currentProjectIndex = 0;
+
+        // --- DOM ELEMENTS ---
+        const els = {
+            featTitle: document.getElementById('feat-title'),
+            featTitleMob: document.getElementById('feat-title-mobile'),
+            featShortDesc: document.getElementById('feat-short-desc'),
+            featMainImg: document.getElementById('feat-main-img'),
+            featPrevImg: document.getElementById('feat-prev-img'),
+            featNextImg: document.getElementById('feat-next-img'),
+            carouselDots: document.getElementById('carousel-dots'),
+            featThumbs: [
+                document.getElementById('feat-thumb-1'), document.getElementById('feat-thumb-2'),
+                document.getElementById('feat-thumb-3'), document.getElementById('feat-thumb-4')
+            ],
+            featTags: document.getElementById('feat-tags'),
+            featRole: document.getElementById('feat-role'),
+            
+            detTitle: document.getElementById('detail-title'),
+            detActiveImg: document.getElementById('detail-active-img'),
+            detGalleryStrip: document.getElementById('detail-gallery-strip'),
+            detDesc: document.getElementById('detail-desc'),
+            detMetaRole: document.getElementById('detail-meta-role'),
+            detMetaEngine: document.getElementById('detail-meta-engine'),
+            detMetaDate: document.getElementById('detail-meta-date'),
+            detMetaTeam: document.getElementById('detail-meta-team'),
+            detTags: document.getElementById('detail-tags'),
+            
+            longDescContent: document.getElementById('long-desc-content'),
+            longDescChallenges: document.getElementById('long-desc-challenges'),
+            
+            btnPlay: document.getElementById('btn-play')
+        };
+
+        function createTagHTML(tagText) {
+            return `<span class="bg-steam-tagBg text-steam-blue text-xs px-2 py-0.5 rounded cursor-pointer hover:bg-steam-blue hover:text-white transition-colors">${tagText}</span>`;
+        }
+
+        function loadProject(index) {
+            const proj = projectsData[index];
+            const prevIndex = (index - 1 + projectsData.length) % projectsData.length;
+            const nextIndex = (index + 1) % projectsData.length;
+            
+            // Update Top Featured Block
+            els.featTitle.textContent = proj.title;
+            els.featTitleMob.textContent = proj.title;
+            els.featShortDesc.textContent = proj.shortDesc;
+            els.featMainImg.src = proj.featuredMainImg;
+            
+            // Update Adjacent Project Previews for Carousel
+            if(els.featPrevImg) els.featPrevImg.src = projectsData[prevIndex].featuredMainImg;
+            if(els.featNextImg) els.featNextImg.src = projectsData[nextIndex].featuredMainImg;
+            
+            // Render Carousel Dots
+            if (els.carouselDots) {
+                els.carouselDots.innerHTML = '';
+                projectsData.forEach((_, i) => {
+                    const dot = document.createElement('div');
+                    dot.onclick = () => {
+                        currentProjectIndex = i;
+                        loadProject(currentProjectIndex);
+                    };
+                    if (i === index) {
+                        dot.className = 'w-[15px] h-[9px] rounded-[3px] bg-white cursor-pointer shadow-[0_0_5px_rgba(255,255,255,0.5)]';
+                    } else {
+                        dot.className = 'w-[15px] h-[9px] rounded-[3px] bg-[#3e4a56] hover:bg-[#5f7182] transition-colors cursor-pointer';
+                    }
+                    els.carouselDots.appendChild(dot);
+                });
+            }
+
+            proj.featuredThumbs.forEach((imgSrc, i) => { if(els.featThumbs[i]) els.featThumbs[i].src = imgSrc; });
+            els.featRole.textContent = `Role: ${proj.role}`;
+            els.featTags.innerHTML = proj.tags.slice(0, 4).map(createTagHTML).join('');
+
+            // Update Middle Detailed Hero
+            els.detTitle.textContent = proj.title;
+            els.detDesc.textContent = proj.shortDesc; // Reusing short desc for consistency with design
+            els.detMetaRole.textContent = proj.role;
+            els.detMetaEngine.textContent = proj.engine;
+            els.detMetaDate.textContent = proj.date;
+            els.detMetaTeam.textContent = proj.teamSize;
+            els.detTags.innerHTML = proj.tags.map(createTagHTML).join('');
+            
+            // Set first gallery image as active
+            els.detActiveImg.src = proj.galleryImgs[0];
+            
+            // Build Gallery Strip
+            els.detGalleryStrip.innerHTML = '';
+            proj.galleryImgs.forEach((imgSrc, i) => {
+                const thumbDiv = document.createElement('div');
+                thumbDiv.className = `w-32 h-20 flex-shrink-0 cursor-pointer relative ${i === 0 ? 'border-2 border-white' : 'opacity-70 hover:opacity-100'} transition-all`;
+                thumbDiv.innerHTML = `<img src="${imgSrc}" class="w-full h-full object-cover">`;
+                thumbDiv.onclick = () => {
+                    els.detActiveImg.src = imgSrc;
+                    // Reset borders
+                    Array.from(els.detGalleryStrip.children).forEach(child => {
+                        child.className = 'w-32 h-20 flex-shrink-0 cursor-pointer relative opacity-70 hover:opacity-100 transition-all';
+                    });
+                    // Set active border
+                    thumbDiv.className = 'w-32 h-20 flex-shrink-0 cursor-pointer relative border-2 border-white transition-all';
+                };
+                els.detGalleryStrip.appendChild(thumbDiv);
+            });
+
+            // Update Bottom Deep Dive
+            els.longDescContent.innerHTML = proj.longDescHTML;
+            els.longDescChallenges.textContent = proj.challengesText;
+
+            // Update Links
+            els.btnPlay.href = proj.playLink;
+        }
+
+        function nextProject() {
+            currentProjectIndex = (currentProjectIndex + 1) % projectsData.length;
+            loadProject(currentProjectIndex);
+            // Optional: scroll slightly to show change
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function prevProject() {
+            currentProjectIndex = (currentProjectIndex - 1 + projectsData.length) % projectsData.length;
+            loadProject(currentProjectIndex);
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function navigate(viewId) {
+            // Hide all views
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-about').classList.add('hidden');
+            document.getElementById('view-contact').classList.add('hidden');
+            
+            // Reset nav styles
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('text-steam-blue');
+                link.classList.add('text-steam-text');
+                // exception for title class in desktop nav
+                if(link.id === 'nav-home' && viewId !== 'home') link.classList.replace('text-steam-title', 'text-steam-text');
+            });
+
+            // Show selected view
+            document.getElementById(`view-${viewId}`).classList.remove('hidden');
+            
+            // Highlight active nav
+            const activeNav = document.getElementById(`nav-${viewId}`);
+            if(activeNav) {
+                activeNav.classList.remove('text-steam-text');
+                activeNav.classList.add('text-steam-blue'); // Or keep title white
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        // Initialize first project on load
+        window.onload = () => {
+            loadProject(currentProjectIndex);
+            // Ensure Home is styled active initially
+            document.getElementById('nav-home').classList.replace('text-steam-text', 'text-steam-title');
+        };
+
+    </script>
+</body>
+</html>
