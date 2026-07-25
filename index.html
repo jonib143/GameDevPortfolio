@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Developer Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <!-- FontAwesome for standard icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -14,22 +14,22 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['VT323', 'monospace'],
                     },
                     colors: {
                         steam: {
-                            bg: '#1b2838',        // Main body background
-                            nav: '#171a21',       // Header nav
-                            panel: '#101822',     // Darker panels
-                            panelHover: '#1f2f42',
-                            text: '#c6d4df',      // Primary readable text
-                            title: '#ffffff',     // Bright titles
-                            blue: '#66c0f4',      // Accent links/tags
-                            blueDark: '#417a9b',
-                            tagBg: '#2a475e',     // Tag background
-                            btnGreenTop: '#79b929', // Play button gradient top
-                            btnGreenBot: '#5e8f1c', // Play button gradient bottom
-                            highlightBg: 'rgba(38, 54, 69, 0.6)'
+                            bg: '#000000',        // Main body background
+                            nav: '#111111',       // Header nav
+                            panel: '#0a0a0a',     // Darker panels
+                            panelHover: '#222222',
+                            text: '#39ff14',      // Neon green
+                            title: '#ff003c',     // Neon red
+                            blue: '#ffff00',      // Neon yellow (accent)
+                            blueDark: '#cccc00',
+                            tagBg: '#222222',     // Tag background
+                            btnGreenTop: '#ff003c', // Play button gradient top (Red)
+                            btnGreenBot: '#aa0028', // Play button gradient bottom
+                            highlightBg: 'rgba(57, 255, 20, 0.1)'
                         }
                     },
                     backgroundImage: {
@@ -42,25 +42,26 @@
     </script>
     <style>
         body {
-            background-color: #1b2838;
-            color: #c6d4df;
+            background-color: #000000;
+            color: #39ff14;
             overflow-y: scroll;
+            font-size: 1.125rem;
         }
 
-        /* Steam style scrollbar */
+        /* Arcade style scrollbar */
         ::-webkit-scrollbar {
             width: 14px;
         }
         ::-webkit-scrollbar-track {
-            background: #171a21;
+            background: #111111;
         }
         ::-webkit-scrollbar-thumb {
-            background: #455a64;
+            background: #39ff14;
             border-radius: 2px;
-            border: 3px solid #171a21;
+            border: 3px solid #111111;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #546e7a;
+            background: #ffff00;
         }
 
         .steam-shadow {
@@ -205,7 +206,7 @@
                 
                 <!-- SECTION 2: Detailed Game Hero (Matches Image 2 layout) -->
                 <section id="details-section" class="pt-4 scroll-mt-20">
-                    <h1 id="detail-title" class="text-3xl font-bold text-steam-title mb-4 font-serif tracking-wide">Project Title</h1>
+                    <h1 id="detail-title" class="text-3xl font-bold text-steam-title mb-4 tracking-widest uppercase">Project Title</h1>
                     
                     <div class="flex flex-col lg:flex-row gap-6 bg-steam-panel/30 p-4 rounded bg-gradient-to-br from-steam-nav to-transparent steam-shadow">
                         
@@ -259,7 +260,7 @@
 
                             <!-- Action Buttons -->
                             <div class="mt-auto pt-4 flex flex-col gap-2">
-                                <a id="btn-play" href="#" target="_blank" class="block w-full py-3 rounded text-center text-white font-semibold tracking-wide shadow-md hover:brightness-110 transition-all" style="background: linear-gradient(to right, #79b929, #5e8f1c);">
+                                <a id="btn-play" href="#" target="_blank" class="block w-full py-3 rounded text-center text-white font-semibold tracking-widest shadow-md hover:brightness-110 transition-all uppercase" style="background: linear-gradient(to right, #ff003c, #aa0028);">
                                     <i class="fa-solid fa-play mr-2"></i> Play / Download Game
                                 </a>
                             </div>
@@ -285,7 +286,7 @@
 
         <!-- VIEW: ABOUT ME -->
         <div id="view-about" class="hidden w-full max-w-4xl mx-auto px-4 py-12 fade-in">
-            <h1 class="text-3xl font-bold text-steam-title mb-6 font-serif">About the Developer</h1>
+            <h1 class="text-3xl font-bold text-steam-title mb-6 tracking-widest uppercase">About the Developer</h1>
             <div class="bg-steam-nav p-8 rounded shadow-lg flex flex-col md:flex-row gap-8 items-start">
                 <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-steam-panel flex-shrink-0 mx-auto md:mx-0 shadow-black shadow-lg">
                     <img src="https://placehold.co/400x400/2a475e/c6d4df?text=Profile+Pic" alt="Profile" class="w-full h-full object-cover">
@@ -309,7 +310,7 @@
 
         <!-- VIEW: CONTACT -->
         <div id="view-contact" class="hidden w-full max-w-2xl mx-auto px-4 py-12 fade-in">
-            <h1 class="text-3xl font-bold text-steam-title mb-6 font-serif text-center">Get In Touch</h1>
+            <h1 class="text-3xl font-bold text-steam-title mb-6 tracking-widest uppercase text-center">Get In Touch</h1>
             <div class="bg-steam-nav p-8 rounded shadow-lg">
                 <p class="text-center text-steam-text mb-8">I'm currently looking for new opportunities. Feel free to reach out!</p>
                 
