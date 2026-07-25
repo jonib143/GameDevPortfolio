@@ -390,91 +390,28 @@
                 repoLink: "#"
             },
             {
-                id: "oxygen-clone",
-                title: "Colony Survival Sim",
-                shortDesc: "A deep space-colony simulation game. Manage oxygen, warmth, and sustenance to keep your industrious crew alive inside an alien space rock.",
-                role: "Lead Gameplay Programmer",
-                engine: "Unity 2D",
-                date: "Dec 2023",
-                teamSize: "Solo Project",
-                tags: ["Colony Sim", "Base Building", "Survival", "Resource Management"],
-                featuredMainImg: phImg(800, 450, "Featured Hero Artwork", "112233", "ffffff"),
+                id: "samsara",
+                title: "Samsara",
+                shortDesc: "Samsara is a 3D horror game wherein you play as Jack who is trapped in a hellish factory haunted by ghosts and manufactures a required quota per day according to his mystery boss. Jack needs to survive each night in the factory dodging the ghosts that haunt the factory. But as the night progresses Jack will soon find out the mysteries that are hidden in the factory.",
+                role: "Game Programmer",
+                engine: "Game Engine",
+                date: "2025",
+                teamSize: "Team",
+                tags: ["2025", "Horror", "FirstPerson POV", "Survival"],
+                featuredMainImg: "Samsara2.png",
                 featuredThumbs: [
-                    phImg(300, 169, "Action 1", "224455"), phImg(300, 169, "Action 2", "335566"),
-                    phImg(300, 169, "Action 3", "446677"), phImg(300, 169, "Action 4", "557788")
+                    "Samsara2.png", phImg(300, 169, "More Soon", "aa0028"),
+                    phImg(300, 169, "More Soon", "aa0028"), phImg(300, 169, "More Soon", "aa0028")
                 ],
-                coverImg: phImg(460, 215, "Game Header Capsule", "0f161f", "66c0f4"),
+                coverImg: "Samsara2.png",
                 galleryImgs: [
-                    phImg(800, 450, "Gameplay Video/Gif Placeholder", "1b2838", "a1f410"),
-                    phImg(800, 450, "Base Building Mechanics", "2a475e"),
-                    phImg(800, 450, "Resource UI Screen", "171a21"),
-                    phImg(800, 450, "Exploration View", "384e5d")
+                    "Samsara2.png",
+                    phImg(800, 450, "More Soon", "aa0028")
                 ],
                 longDescHTML: `
-                    <p class="mb-4">In this simulation, you'll find that scarcities of essential resources are constant threats. Guide colonists through the perils of subterranean living and watch as their population grows.</p>
-                    <p class="text-steam-blue font-semibold mb-2 mt-6">Build Extensive Bases:</p>
-                    <img src="${phImg(800, 250, 'Inline Environment Image', '112233')}" class="w-full rounded mb-4 border border-gray-700 shadow-md">
-                    <p class="mb-4">Everything is under your control, from excavation to plumbing and power systems. Resources begin depleting fast, so optimization is key.</p>
-                    <p class="text-steam-blue font-semibold mb-2 mt-6">Complex Systems Integration:</p>
-                    <img src="${phImg(800, 250, 'Systems Diagram/UI', '2a475e')}" class="w-full rounded mb-4 border border-gray-700 shadow-md">
-                    <p>Designed a modular component system to handle interacting physics, gas distribution, and heat transfer across thousands of tile entities efficiently.</p>
+                    <p class="mb-4">Samsara is a 3D horror game wherein you play as Jack who is trapped in a hellish factory haunted by ghosts and manufactures a required quota per day according to his mystery boss. Jack needs to survive each night in the factory dodging the ghosts that haunt the factory. But as the night progresses Jack will soon find out the mysteries that are hidden in the factory.</p>
                 `,
-                challengesText: "The biggest challenge was creating a robust cellular automata system for gas and liquid physics that ran at 60fps. I utilized Unity's Job System and Burst Compiler to multithread the chunk updates, resulting in a 400% performance increase.",
-                playLink: "#",
-                repoLink: "#"
-            },
-            {
-                id: "neon-slasher",
-                title: "Neon Cyber Knight",
-                shortDesc: "A fast-paced, neon-drenched hack and slash platformer. Master fluid movement and precise combat to defeat robotic hordes in a cyberpunk metropolis.",
-                role: "Combat Designer & Programmer",
-                engine: "Unreal Engine 5",
-                date: "May 2024",
-                teamSize: "3 Members",
-                tags: ["Action", "Platformer", "Hack & Slash", "Cyberpunk"],
-                featuredMainImg: phImg(800, 450, "Neon Knight Hero Art", "4a0050", "00ffff"),
-                featuredThumbs: [
-                    phImg(300, 169, "Combat Move", "300040"), phImg(300, 169, "Boss Fight", "500060"),
-                    phImg(300, 169, "Platforming", "600070"), phImg(300, 169, "Skill Tree", "700080")
-                ],
-                coverImg: phImg(460, 215, "Neon Knight Header", "200030", "ff00ff"),
-                galleryImgs: [
-                    phImg(800, 450, "Combat Trailer Video", "4a0050", "ffffff"),
-                    phImg(800, 450, "Level 1 Showcase", "300040"),
-                    phImg(800, 450, "Enemy Variety", "500060")
-                ],
-                longDescHTML: `
-                    <p class="mb-4">Step into the cybernetic boots of a rogue enforcer. Use a variety of combo strings and dash mechanics to obliterate enemies.</p>
-                    <img src="${phImg(800, 250, 'Combat Action Shot', '4a0050')}" class="w-full rounded mb-4 border border-gray-700 shadow-md">
-                    <p>Focus was on 'game feel', utilizing hit stop, camera shake, and particle explosions to make every strike feel impactful.</p>
-                `,
-                challengesText: "Implementing a flexible combo system state machine in C++ that designers could easily tweak using Blueprints. I created a custom data-driven animation notify system to handle hitboxes accurately during complex attack animations.",
-                playLink: "#",
-                repoLink: "#"
-            },
-            {
-                id: "puzzle-echo",
-                title: "Echoes in the Dark",
-                shortDesc: "An atmospheric puzzle-adventure where you manipulate sound waves to navigate a pitch-black labyrinth and reveal hidden geometry.",
-                role: "Solo Developer",
-                engine: "Godot 4",
-                date: "Oct 2022",
-                teamSize: "Solo",
-                tags: ["Puzzle", "Atmospheric", "Audio-based", "Indie"],
-                featuredMainImg: phImg(800, 450, "Echoes Key Art", "050510", "aaaaaa"),
-                featuredThumbs: [
-                    phImg(300, 169, "Sonar Ping", "101020"), phImg(300, 169, "Revealed Path", "151525"),
-                    phImg(300, 169, "Puzzle Element", "202030"), phImg(300, 169, "Darkness", "0a0a1a")
-                ],
-                coverImg: phImg(460, 215, "Echoes Header", "050510", "ffffff"),
-                galleryImgs: [
-                    phImg(800, 450, "Echolocation Demo", "050510", "ffffff"),
-                    phImg(800, 450, "Puzzle Room", "101020")
-                ],
-                longDescHTML: `
-                    <p class="mb-4">Rely on your ears as much as your eyes. Emitting sound pulses paints the environment temporarily, revealing platforms and hazards.</p>
-                `,
-                challengesText: "Writing a custom shader in GLSL to visualize sound waves hitting geometry in real-time. The shader uses distance fields from audio sources to mask world textures, creating the 'echolocation' visual effect.",
+                challengesText: "Programmed player controller, inventory, and health systems, establishing a working core character interactions.",
                 playLink: "#",
                 repoLink: "#"
             }
