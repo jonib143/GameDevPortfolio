@@ -180,10 +180,6 @@
                             </div>
                             
                             <div class="relative z-10">
-                                <div class="text-xs text-steam-text mb-1">Tags:</div>
-                                <div id="feat-tags" class="flex flex-wrap gap-1 mb-3">
-                                    <!-- Tags injected by JS -->
-                                </div>
                                 <div class="flex justify-between items-center text-sm">
                                     <span id="feat-role" class="text-steam-text">Role: Programmer</span>
                                     <span class="text-steam-title bg-steam-panel px-3 py-1 rounded-sm border border-transparent group-hover:border-steam-blueDark transition-colors">View Details</span>
@@ -266,13 +262,6 @@
                                 </div>
                             </div>
 
-                            <!-- Tags -->
-                            <div class="mt-2">
-                                <p class="text-[#556772] text-xs mb-1">Popular user-defined tags for this product:</p>
-                                <div id="detail-tags" class="flex flex-wrap gap-1">
-                                </div>
-                            </div>
-
                             <!-- Action Buttons -->
                             <div class="mt-auto pt-4 flex flex-col gap-2">
                                 <a id="btn-play" href="#" target="_blank" class="block w-full py-3 rounded text-center text-white font-semibold tracking-wide shadow-md hover:brightness-110 transition-all" style="background: linear-gradient(to right, #79b929, #5e8f1c);">
@@ -283,31 +272,7 @@
                     </div>
                 </section>
 
-                <!-- SECTION 3: Deep Dive (Matches Image 3 layout) -->
-                <section class="mt-8">
-                    <h2 class="text-white border-b border-gray-700 pb-2 mb-4 font-bold uppercase tracking-wider text-sm flex items-center gap-2">
-                        <span class="bg-steam-blue w-1 h-4 block"></span> About This Project
-                    </h2>
-                    
-                    <!-- Content Area -->
-                    <div class="bg-steam-highlightBg p-6 rounded-md shadow-inner text-base text-steam-text leading-relaxed">
-                        
-                        <div id="long-desc-content" class="space-y-6">
-                            <!-- Injected by JS: Paragraphs and Inline Images -->
-                        </div>
 
-                        <!-- Technical Challenges Section -->
-                        <div class="mt-10 border-t border-gray-700 pt-6">
-                            <h3 class="text-steam-blue font-bold text-lg mb-3">My Role & Key Challenges</h3>
-                            <div class="bg-steam-panel p-4 rounded border-l-4 border-steam-blue">
-                                <p id="long-desc-challenges" class="italic text-gray-400 text-sm md:text-base">
-                                    Description of specific programming/design challenges overcome during development.
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
 
             </div>
         </div>
@@ -477,7 +442,6 @@
                 document.getElementById('feat-thumb-1'), document.getElementById('feat-thumb-2'),
                 document.getElementById('feat-thumb-3'), document.getElementById('feat-thumb-4')
             ],
-            featTags: document.getElementById('feat-tags'),
             featRole: document.getElementById('feat-role'),
             
             detTitle: document.getElementById('detail-title'),
@@ -488,10 +452,6 @@
             detMetaEngine: document.getElementById('detail-meta-engine'),
             detMetaDate: document.getElementById('detail-meta-date'),
             detMetaTeam: document.getElementById('detail-meta-team'),
-            detTags: document.getElementById('detail-tags'),
-            
-            longDescContent: document.getElementById('long-desc-content'),
-            longDescChallenges: document.getElementById('long-desc-challenges'),
             
             btnPlay: document.getElementById('btn-play')
         };
@@ -535,7 +495,6 @@
 
             proj.featuredThumbs.forEach((imgSrc, i) => { if(els.featThumbs[i]) els.featThumbs[i].src = imgSrc; });
             els.featRole.textContent = `Role: ${proj.role}`;
-            els.featTags.innerHTML = proj.tags.slice(0, 4).map(createTagHTML).join('');
 
             // Update Middle Detailed Hero
             els.detTitle.textContent = proj.title;
@@ -544,7 +503,6 @@
             els.detMetaEngine.textContent = proj.engine;
             els.detMetaDate.textContent = proj.date;
             els.detMetaTeam.textContent = proj.teamSize;
-            els.detTags.innerHTML = proj.tags.map(createTagHTML).join('');
             
             // Set first gallery image as active
             els.detActiveImg.src = proj.galleryImgs[0];
@@ -566,10 +524,6 @@
                 };
                 els.detGalleryStrip.appendChild(thumbDiv);
             });
-
-            // Update Bottom Deep Dive
-            els.longDescContent.innerHTML = proj.longDescHTML;
-            els.longDescChallenges.textContent = proj.challengesText;
 
             // Update Links
             els.btnPlay.href = proj.playLink;
