@@ -179,12 +179,7 @@
                                 </div>
                             </div>
                             
-                            <div class="relative z-10">
-                                <div class="flex justify-between items-center text-sm">
-                                    <span id="feat-role" class="text-steam-text">Role: Programmer</span>
-                                    <span class="text-steam-title bg-steam-panel px-3 py-1 rounded-sm border border-transparent group-hover:border-steam-blueDark transition-colors">View Details</span>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
 
@@ -453,7 +448,6 @@
                 document.getElementById('feat-thumb-1'), document.getElementById('feat-thumb-2'),
                 document.getElementById('feat-thumb-3'), document.getElementById('feat-thumb-4')
             ],
-            featRole: document.getElementById('feat-role'),
             
             detTitle: document.getElementById('detail-title'),
             detActiveImg: document.getElementById('detail-active-img'),
@@ -506,7 +500,6 @@
             }
 
             proj.featuredThumbs.forEach((imgSrc, i) => { if(els.featThumbs[i]) els.featThumbs[i].src = imgSrc; });
-            els.featRole.textContent = `Role: ${proj.role}`;
 
             // Update Middle Detailed Hero
             els.detTitle.textContent = proj.title;
