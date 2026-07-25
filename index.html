@@ -272,7 +272,18 @@
                     </div>
                 </section>
 
-
+                <section class="mt-8">
+                    <h2 class="text-white border-b border-gray-700 pb-2 mb-4 font-bold uppercase tracking-wider text-sm flex items-center gap-2">
+                        <span class="bg-steam-blue w-1 h-4 block"></span> My Role & Key Challenges
+                    </h2>
+                    <div class="bg-steam-highlightBg p-6 rounded-md shadow-inner text-base text-steam-text leading-relaxed">
+                        <div class="bg-steam-panel p-4 rounded border-l-4 border-steam-blue">
+                            <p id="long-desc-challenges" class="italic text-gray-400 text-sm md:text-base">
+                                Description of specific programming/design challenges overcome during development.
+                            </p>
+                        </div>
+                    </div>
+                </section>
 
             </div>
         </div>
@@ -452,6 +463,7 @@
             detMetaEngine: document.getElementById('detail-meta-engine'),
             detMetaDate: document.getElementById('detail-meta-date'),
             detMetaTeam: document.getElementById('detail-meta-team'),
+            longDescChallenges: document.getElementById('long-desc-challenges'),
             
             btnPlay: document.getElementById('btn-play')
         };
@@ -524,6 +536,9 @@
                 };
                 els.detGalleryStrip.appendChild(thumbDiv);
             });
+
+            // Update Deep Dive Content
+            els.longDescChallenges.textContent = proj.challengesText;
 
             // Update Links
             els.btnPlay.href = proj.playLink;
